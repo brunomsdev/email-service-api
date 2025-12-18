@@ -41,6 +41,9 @@ app.get("/", async (req, res) => {
     return res.status(500).send(error)
   }
 
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`)
 })
+  
+  app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`)
+  })
+  
