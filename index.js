@@ -1,7 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const { sentEmail } = require("./src/services/emailService");
 const app = express();
-require("dotenv").config();
 
 const port = 4505;
 
@@ -25,11 +26,11 @@ app.get("/", async (req, res) => {
 
   try {
     const result = await sentEmail(
-        "bruno.dev.ms@gmail.com",
-        "Bruno Milhomens",
-        "Teste de email",
-        "<p>Teste de email</p>"
-      )
+      'bruno.dev.ms@gmail.com',
+      'Bruno Milhomens',
+      'Teste de email',
+      '<p>Teste</p>'
+    );
 
       if(!result.success){
         return res.status(500).send(result.error)

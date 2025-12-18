@@ -5,12 +5,14 @@ const mailerSend = new MailerSend({
 })
 
 async function sentEmail(to, toName, subject, html, text=""){
+
   try {
     const sendEmail = await mailerSend.email.send({
       from: {
         email: process.env.MAILERSEND_FROM_EMAIL,
         name: process.env.MAILERSEND_FROM_NAME,
-        to: [
+      },
+      to: [
           {
           email: to,
           name: toName || to,
@@ -19,7 +21,6 @@ async function sentEmail(to, toName, subject, html, text=""){
         subject: subject,
         html: html,
         text: text
-      }
     })
 
     return {
@@ -28,7 +29,7 @@ async function sentEmail(to, toName, subject, html, text=""){
     }
 
   } catch (error) {
-      console.error(error);
+      console.error(error.body.errors.to);
       return {
         success: false,
         error: error.message
